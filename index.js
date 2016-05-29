@@ -43,26 +43,30 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       var text = event.message.text
       console.log(text, sender)
-      var Textar = text.subtext(' ')
+      var Textar = text.split(' ')
       if (Textar[0] === 'sum') {
-         var sum = parseInt(Textar[1]) + parseInt(Textar[2])
-         sendTextMessage(sender, sum + '')
+        var sum = parseInt(Textar[1]) + parseInt(Textar[2])
+        sendTextMessage(sender, sum + '')
+      } else if (Textar[0] === 'max') {
+        if (parseInt(Textar[1]) > parseInt(Textar[2])) {
+          sendTextMessage(sender, Textar[1])
+        } else {
+          sendTextMessage(sender, Textar[2])
+        }
+      } else if (Textar[0] === 'min') {
+        if (parseInt(Textar[1]) < parseInt(Textar[2])) {
+          sendTextMessage(sender, Textar[1])
+        } else {
+          sendTextMessage(sender, Textar[2])
+        }
+      } else if (Textar[0] === 'avg') {
+        var avgSum = 0
+        for (var b = 1; b < arrText.length; b++) {
+          avgSum = avgSum + parseInt(Textar[b])
+        }
+        var avg = avgSum / (arrText.length - 1)
+        sendTextMessage(sender, avg)
       }
-      // else if (Textar[0] === 'max') {
-      //     if (parseInt(Textar[1]) > parseInt(Textar[2])) {
-      //       sendTextMessage(sender, Textar[1])
-      //     } else {
-      //       sendTextMessage(sender, Textar[2])
-      //   }
-      // } else if (Textar[0] === 'min') {
-      //   if (parseInt(Textar[1]) < parseInt(Textar[2])) {
-      //     sendTextMessage(sender, Textar[1])
-      //   } else {
-      //     sendTextMessage(sender, Textar[2])
-      //   }
-      // }
-
-      else sendTextMessage(sender, 'systex Error')
     }
   }
   res.sendStatus(200)
