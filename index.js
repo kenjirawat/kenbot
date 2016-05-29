@@ -26,7 +26,7 @@ function sendTextMessage (sender, text) {
 
 app.use(bodyParser.json())
 app.get('/', function (req, res) {
-  res.send('Hello word')
+  res.send('Hello word 2')
 })
 app.get('/webhook', function (req, res) {
   if (req.query['hub.verify_token'] === '1234') {
@@ -46,18 +46,18 @@ app.post('/webhook/', function (req, res) {
       var Textar = text.split(' ')
       if (Textar[0] === 'sum') {
         var sum = parseInt(Textar[1]) + parseInt(Textar[2])
-        sendTextMessage(sender, sum + '')
+        sendTextMessage(sender, 'Sum = ' + sum )
       } else if (Textar[0] === 'max') {
         if (parseInt(Textar[1]) > parseInt(Textar[2])) {
-          sendTextMessage(sender, Textar[1])
+          sendTextMessage(sender,'Max = ' + Textar[1])
         } else {
-          sendTextMessage(sender, Textar[2])
+          sendTextMessage(sender,'Max = ' + Textar[2])
         }
       } else if (Textar[0] === 'min') {
         if (parseInt(Textar[1]) < parseInt(Textar[2])) {
-          sendTextMessage(sender, Textar[1])
+          sendTextMessage(sender,'Min = ' + Textar[1])
         } else {
-          sendTextMessage(sender, Textar[2])
+          sendTextMessage(sender,'Min = ' + Textar[2])
         }
       } else if (Textar[0] === 'avg') {
         var avgSum = 0
@@ -65,7 +65,7 @@ app.post('/webhook/', function (req, res) {
           avgSum = avgSum + parseInt(Textar[b])
         }
         var avg = avgSum / (arrText.length - 1)
-        sendTextMessage(sender, avg)
+        sendTextMessage(sender,'Avg = '+ avg)
       }
     }
   }
