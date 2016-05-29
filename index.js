@@ -43,32 +43,12 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       var text = event.message.text
       console.log(text, sender)
-      var subtext = text.subst(' ')
-      if (subtext[0] === 'sum') {
-        var sum = parseInt(subtext[1]) + parseInt(subtext[2])
-        sendTextMessage(sender, sum + '')
-      }
-      else if (subtext[0] === 'max') {
-        if (parseInt(subtext[1]) > parseInt(subtext[2])) {
-          sendTextMessage(sender, subtext[1])
-        } else {
-          sendTextMessage(sender, subtext[2])
-        }
-      } else if (subtext[0] === 'min') {
-        if (parseInt(subtext[1]) < parseInt(subtext[2])) {
-          sendTextMessage(sender, subtext[1])
-        } else {
-          sendTextMessage(sender, subtext[2])
-        }
-      } else if (subtext[0] === 'avg') {
-        var avgSum = 0
-        for (var b = 1; b < arrText.length; b++) {
-          avgSum = avgSum + parseInt(subtext[b])
-        }
-        var avg = avgSum / (arrText.length - 1)
-        sendTextMessage(sender, avg)
+      var Textar = text.split(' ')
+      if (Textar[0] === 'sum') {
+         var sum = parseInt(Textar[1]) + parseInt(Textar[2])
+         sendTextMessage(sender, sum + '')
       } else sendTextMessage(sender, 'systex Error')
-    }
+      }
   }
   res.sendStatus(200)
 })
