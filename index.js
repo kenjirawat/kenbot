@@ -48,10 +48,10 @@ app.post('/webhook/', function (req, res) {
          var sum = parseInt(Textar[1]) + parseInt(Textar[2])
          sendTextMessage(sender, sum + '')
       } else if (Textar[0] === 'max') {
-        if (parseInt(Textar[1]) > parseInt(Textar[2])) {
-          sendTextMessage(sender, Textar[1])
-        } else {
-          sendTextMessage(sender, Textar[2])
+          if (parseInt(Textar[1]) > parseInt(Textar[2])) {
+            sendTextMessage(sender, Textar[1])
+          } else {
+            sendTextMessage(sender, Textar[2])
         }
       } else if (Textar[0] === 'min') {
         if (parseInt(Textar[1]) < parseInt(Textar[2])) {
@@ -59,15 +59,10 @@ app.post('/webhook/', function (req, res) {
         } else {
           sendTextMessage(sender, Textar[2])
         }
-      } else if (Textar[0] === 'avg') {
-          var avgSum = 0
-          for (var b = 1; b < arrText.length; b++) {
-            avgSum = avgSum + parseInt(Textar[b])
-          }
-          var avg = avgSum / (arrText.length - 1)
-          sendTextMessage(sender, avg)
-        }
-      } else sendTextMessage(sender, 'systex Error')
+      }
+
+      else sendTextMessage(sender, 'systex Error')
+      }
   }
   res.sendStatus(200)
 })
