@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 var request = require('request')
-var token = 'CAAWBsWbe93ABAJHtoZCIPGhG5mFmV2ocmZB5BaZBOjYbsqQIK48eMUtuBy6tBxizpw0vnEGxByG9Rc80jCke10gb5L70SYNdJbJmUZBZCl6Re33LSypKLjZCZBC8dmFDa88pAR4cXMjtkCZCJoW6NNcMxMJMJjFKeODLf30UHK3Fzmri8vZCobskPghJvah54A54ZD'
+var token = 'EAAWBsWbe93ABANWBJtmEcZAfo5b7qhFawTlFyMxc5qKIkIvLvjQQmUsx3i6gwA0htFh7z8cORsTIuvOFxRynbrRKPjAS8vtqlMhS1Vy0nEPUheuONf3rjRhX1vVdQdvc67GHrel74OLvR8JZBDieZAlZBoyC1F3R7ZBZARzDL3vwZDZD'
 function sendTextMessage (sender, text) {
   messageData = {
     text: text
@@ -43,13 +43,11 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       var text = event.message.text
       console.log(text,sender)
-      var subtext = text.sub(' ')
+      var subtext = text.subst(' ')
+
       if('hi'===text){
-        sendTextMessage(sender,'helo')
-      }
-      else if ('ขอ'=== text) {
-        sendTextMessage(sender,'https://www.youtube.com/results?search_query='+text)
-      } else if (subtext[0] === 'sum') {
+        sendTextMessage(sender,'test hi')
+      }else if (subtext[0] === 'sum') {
         var sum = perseInt(subtext[1])+perseInt(subtext[2])
         sendTextMessage(sender,sum + '')
     }
