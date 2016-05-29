@@ -46,26 +46,26 @@ app.post('/webhook/', function (req, res) {
       var Textar = text.split(' ')
       if (Textar[0] === 'sum') {
         var sum = parseInt(Textar[1]) + parseInt(Textar[2])
-        sendTextMessage(sender,sum )
+        sendTextMessage(sender, 'Min = ' + sum )
       } else if (Textar[0] === 'max') {
         if (parseInt(Textar[1]) > parseInt(Textar[2])) {
-          sendTextMessage(sender,Textar[1])
+          sendTextMessage(sender,'Max = ' + Textar[1])
         } else {
-          sendTextMessage(sender,Textar[2])
+          sendTextMessage(sender,'Max = ' + Textar[2])
         }
       } else if (Textar[0] === 'min') {
         if (parseInt(Textar[1]) < parseInt(Textar[2])) {
-          sendTextMessage(sender,Textar[1])
+          sendTextMessage(sender,'Min = ' + Textar[1])
         } else {
-          sendTextMessage(sender,Textar[2])
+          sendTextMessage(sender,'Min = ' + Textar[2])
         }
       } else if (Textar[0] === 'avg') {
         var avgSum = 0
-        for (var b = 1; b < arrText.length; b++) {
+        for (var b = 1; b < Textar.length; b++) {
           avgSum = avgSum + parseInt(Textar[b])
         }
-        var avg = avgSum / (arrText.length - 1)
-        sendTextMessage(sender,avg)
+        var avg = avgSum / (Textar.length - 1)
+        sendTextMessage(sender,'Avg = '+ avg)
       }
     }
   }
