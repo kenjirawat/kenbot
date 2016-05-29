@@ -26,7 +26,7 @@ function sendTextMessage (sender, text) {
 
 app.use(bodyParser.json())
 app.get('/', function (req, res) {
-  res.send('Hell word')
+  res.send('Hello word')
 })
 app.get('/webhook', function (req, res) {
   if (req.query['hub.verify_token'] === '1234') {
