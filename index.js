@@ -44,10 +44,10 @@ app.post('/webhook/', function (req, res) {
       var text = event.message.text
       console.log(text)
       if('hi'===text){
-        sendTextMessage(sender,'สวัสดี')
+        sendTextMessage(sender,'helo')
       }
-      else if ('youtube'=== text) {
-        sendTextMessage(sender,'https://www.youtube.com/')
+      else if ('ขอ'=== text) {
+        sendTextMessage(sender,'https://www.youtube.com/results?search_query='+text)
       }else sendTextMessage(sender,'คุณถามว่า '+text)
     // Handle a text message from this sender
     }
