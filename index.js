@@ -67,7 +67,7 @@ app.post('/webhook/', function (req, res) {
         }
         var avg = avgSum / (arrText.length - 1)
         sendTextMessage(sender, avg)
-      }
+      } else sendTextMessage(sender, 'systex Error')
     }
   }
   res.sendStatus(200)
