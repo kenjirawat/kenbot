@@ -41,21 +41,18 @@ app.post('/webhook/', function (req, res) {
     var event = req.body.entry[0].messaging[i]
     var sender = event.sender.id
     if (event.message && event.message.text) {
-      var text = event.message.text.sub(' ')
-      console.log(text)
+      var text = event.message.text
+      console.log(text,sender)
+      var subtext = text.sub(' ')
       if('hi'===text){
         sendTextMessage(sender,'helo')
       }
       else if ('ขอ'=== text) {
         sendTextMessage(sender,'https://www.youtube.com/results?search_query='+text)
-      } else if (text[0] === 'avg') {
-          text.sub(0, 1)
-          var result = text.reduce((prev, curr) => prev + parseInt(curr, 0), 0)
-          console.log(result)
-          answer = result / text.length
-          sendTextMessage(sender, answer)
+      } else if (subtext[0] === 'sum') {
+        var sum = perseInt(subtext[1])+perseInt(subtext[2])
+        sendTextMessage(sender,sum + '')
     }
-    // Handle a text message from this sender
     }
   }
   res.sendStatus(200)
