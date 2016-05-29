@@ -36,21 +36,18 @@ app.get('/webhook', function (req, res) {
   }
 })
 app.post('/webhook/', function (req, res) {
-  messaging_events = req.body.entry[0].messaging
+  var messaging_events = req.body.entry[0].messaging
   for (var i = 0; i < messaging_events.length; i++) {
     var event = req.body.entry[0].messaging[i]
     var sender = event.sender.id
     if (event.message && event.message.text) {
       var text = event.message.text
-      console.log(text,sender)
-      var subtext = text.subst(' ')
-
-      if('hi'===text){
-        sendTextMessage(sender,'test hi')
-      }else if (subtext[0] === 'sum') {
-        var sum = perseInt(subtext[1])+perseInt(subtext[2])
-        sendTextMessage(sender,sum + '')
-    }
+      console.log(text, sender)
+      var Textar = text.split(' ')
+      if (Textar[0] === 'sum') {
+        var sum = parseInt(Textar[1]) + parseInt(Textar[2])
+        sendTextMessage(sender, sum + '')
+      }
     }
   }
   res.sendStatus(200)
